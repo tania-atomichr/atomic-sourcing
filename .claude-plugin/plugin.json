@@ -1,0 +1,9 @@
+{
+  "name": "atomic-sourcing",
+  "description": "The atomic✳HR sourcer's copilot: morning funnel hygiene → contact the saved pile → reply triage (advance or log the no) → call watch → referral asks → personal feedback patterns, across the sourcing-app MCP + LinkedIn MCP + Teamtailor MCP. 7 skills. Sibling of atomic-recruiting (the CES/recruiter persona's plugin).",
+  "version": "1.0.0",
+  "author": {
+    "name": "atomic✳HR",
+    "email": "tania@hireatomic.com"
+  }
+}
