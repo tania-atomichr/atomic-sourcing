@@ -1,0 +1,14 @@
+{
+  "name": "atomic-sourcing",
+  "owner": {
+    "name": "atomic✳HR",
+    "email": "tania@hireatomic.com"
+  },
+  "plugins": [
+    {
+      "name": "atomic-sourcing",
+      "source": "./",
+      "description": "The atomic✳HR sourcer's copilot: funnel hygiene → contact saved → reply triage → call watch → referral asks → feedback patterns, across the sourcing-app + LinkedIn + Teamtailor MCPs."
+    }
+  ]
+}
