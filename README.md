@@ -79,6 +79,11 @@ Checks the three MCPs with real calls, helps you fix anything missing, then tour
 - **Say:** "why are my candidates getting passed on?" / "what should I source differently?"
 - **Know:** it reports sample sizes and calls thin data a hunch, not a finding.
 
+### 7. more-like-them — turn your winners into a search
+- **What it does:** takes the candidates who actually advanced, works out what separates them from the genuinely passed-on pile, keeps only what's visible on a profile before anyone talks to them, and hands back target titles, target companies, ready-to-paste boolean strings, disqualifiers and a thirty-second profile check. Signals no search can surface become screen questions instead.
+- **Say:** "find me more like [candidate]" / "give me a boolean for this role" / "which companies should I be targeting?"
+- **Know:** process rejections (Unresponsive, Duplicated, Timing, Role closed) never count as quality evidence — a candidate who never replied is not a candidate who fell short. Pairs with my-patterns: that one says what to change, this one hands over the search strings. Working inside a Teamtailor candidate profile instead of here? `skills/more-like-them/references/copilot-prompt.md` is the same move as a Co-pilot prompt, built from one candidate.
+
 ---
 
 ## Guardrails (what Claude will and won't do)
