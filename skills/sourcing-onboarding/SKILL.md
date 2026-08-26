@@ -26,22 +26,35 @@ it's missing, exactly how to connect it. Do not assume — check.
 1. **Sourcing-app MCP** — the foundation: your searches, your pending piles, the write verbs.
    - Check: call `my_searches`. If it returns your active searches, it's live. If the tool
      doesn't exist or errors with 401, it's not connected or the token is wrong.
-   - If missing: in the sourcing app (sourcing.hireatomic.com) go to **Settings → Connect your
-     Claude**. That screen shows two things: the **MCP URL** and your **personal token**. Add it
-     as a connector in claude.ai settings (or `claude mcp add --transport http sourcing <URL>`
-     in an interactive session, with the token as the auth header the screen shows). The token
-     is YOURS — never share it, never paste someone else's. If the screen shows no token, ask
-     Tania to enable MCP access for your account.
+   - If missing: add `https://sourcing.hireatomic.com/mcp` as a **custom connector** in your
+     assistant's settings (claude.ai → Settings → Connectors → Add custom connector). Your
+     assistant will open the sourcing app's own sign-in page — sign in as yourself and press
+     **Approve**. That's the whole setup: no token to copy, no header to configure. Your
+     connection then appears on the app's **Connect your AI assistant** screen with a
+     Disconnect button. (Manual setup with a personal link exists under "Manual setup
+     (advanced)" on that screen, only for assistants that can't do the sign-in flow — the link
+     is shown once and must be treated like a password.) If sign-in tells you your account has
+     no access, ask Tania to enable MCP access for your account.
    - The token carries your permissions and nothing more: sourcers cannot touch money, role
      config, or client links through the MCP because they can't through the app.
 
 2. **LinkedIn MCP** — reading your inbox/sent messages and sending, on YOUR LinkedIn session.
    - Check: call `mcp__linkedin__get_my_profile` (or `get_inbox` with limit 1). It should
      return YOUR profile — if it returns someone else's, stop: you're on the wrong session.
-   - If missing: each sourcer has their own LinkedIn MCP endpoint (locally
-     `http://127.0.0.1:8377/mcp`, or your personal `<name>-li.recruithink.com/mcp` tunnel).
-     Ask Tania which applies to you and register it as a connector. Never point at another
-     person's tunnel.
+   - If missing: each sourcer runs their OWN LinkedIn MCP with their own LinkedIn login —
+     never point at another person's endpoint or tunnel. What to use depends on where your
+     assistant runs:
+       * **claude.ai (web/mobile): a localhost address can NEVER work** — the connection comes
+         from Anthropic's servers, not your machine, so `127.0.0.1` is unreachable there. You
+         need your personal tunnel (`<name>-li.recruithink.com/mcp`). Ask Tania to provision
+         yours; if the tunnel resolves to the wrong place, that is a known DNS gotcha (a
+         wildcard record shadowing it) and the fix is a per-teammate CNAME — tell Tania rather
+         than debugging it yourself.
+       * **Claude Code / desktop on your own machine:** `http://127.0.0.1:8377/mcp` works.
+     Two more facts that save an afternoon: the server needs a **one-time LinkedIn login** when
+     first set up, and that session **expires every few weeks** — the symptom is LinkedIn tools
+     silently erroring. The fix is re-running the login on YOUR machine, not retrying the tools
+     (retry storms are what get accounts flagged).
 
 3. **Teamtailor MCP** — meetings, transcripts, candidate timelines, stages.
    - Check: a small call like `list_meetings` or `list_jobs`. If unavailable or unauthed, it's
